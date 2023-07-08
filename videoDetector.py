@@ -4,21 +4,21 @@ import time
 import geocoder
 import os
 
-filename = "/mnt/My Works/Motorcycle-Collision-Avoidance-System/Lane_Finding_Test.mp4"
+filename = "/mnt/My Works/SMart Motorcycle Collision Avoidance System/Smart-Motorcycle-Collision-Avoidance-System/Lane_Finding_Test.mp4"
 
 def detectPotholeonVideo(filename):
     # reading label name from obj.names file
     class_name = []
-    with open(os.path.join("project_files", 'obj.names'), 'r') as f:
+    with open(os.path.join("/mnt/My Works/SMart Motorcycle Collision Avoidance System/Smart-Motorcycle-Collision-Avoidance-System/project_files", 'obj.names'), 'r') as f:
         class_name = [cname.strip() for cname in f.readlines()]
 
     # importing model weights and config file
     # defining the model parameters
-    net1 = cv.dnn.readNet('project_files/yolov4_tiny.weights', 'project_files/yolov4_tiny.cfg')
+    net1 = cv.dnn.readNet('/mnt/My Works/SMart Motorcycle Collision Avoidance System/Smart-Motorcycle-Collision-Avoidance-System/project_files/yolov4_tiny.weights', '/mnt/My Works/SMart Motorcycle Collision Avoidance System/Smart-Motorcycle-Collision-Avoidance-System/project_files/yolov4_tiny.cfg')
     net1.setPreferableBackend(cv.dnn.DNN_BACKEND_CUDA)
     net1.setPreferableTarget(cv.dnn.DNN_TARGET_CUDA_FP16)
     model1 = cv.dnn_DetectionModel(net1)
-    model1.setInputParams(size=(640, 480), scale=1 / 255, swapRB=True)
+    model1.setInputParams(size=(416, 416), scale=1 / 255, swapRB=True)
 
     # defining the video source (0 for camera or file name for video)
     cap = cv.VideoCapture(filename)
@@ -31,7 +31,7 @@ def detectPotholeonVideo(filename):
     # defining parameters for result saving and get coordinates
     # defining initial values for some parameters in the script
     g = geocoder.ip('me')
-    result_path = "pothole_coordinates"
+    result_path = "/mnt/My Works/SMart Motorcycle Collision Avoidance System/Smart-Motorcycle-Collision-Avoidance-System/pothole_coordinates"
     starting_time = time.time()
     Conf_threshold = 0.5
     NMS_threshold = 0.4
